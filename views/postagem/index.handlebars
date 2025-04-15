@@ -1,0 +1,53 @@
+<div class="card mb-3">
+  <div class="card-body">
+    <h1>{{postagem.titulo}}</h1>
+    <hr class="sutil">
+    <small>Data de publicação: {{postagem.data}}</small><br>
+    <hr class="sutil">
+    {{postagem.conteudo}}
+  </div>
+</div>
+
+<!-- Formulário de Comentário -->
+<h3 class="mt-5">Deixe um comentário:</h3>
+
+{{#if user}}
+  <p>Comentando como <strong>{{user.nome}}</strong></p>
+
+  <form action="/comentario/{{postagem._id}}" method="POST">
+    <label>Comentário:</label>
+    <textarea name="texto" class="form-control" required></textarea>
+
+    <button type="submit" class="btn btn-success mt-3">Enviar</button>
+  </form>
+{{else}}
+  <div class="alert alert-warning">
+    Você precisa estar logado para comentar. <a href="/usuarios/login">Clique aqui para entrar</a>.
+  </div>
+{{/if}}
+
+
+<!-- Listagem de Comentários -->
+<h4 class="mt-5">Comentários:</h4>
+{{#each comentarios}}
+  <div class="card mt-2 p-2">
+    <strong>{{nome}}</strong>
+    <p>{{texto}}</p>
+    <small>{{formatDate data}}</small>
+
+
+    {{#if ../user}} <!-- Verifica se o usuário está logado -->
+      {{#if (or ../user.eAdmin (eq ../user.nome nome))}} <!-- Se for admin ou dono do comentário -->
+        <form action="/admin/comentarios/deletar/{{_id}}" method="POST" style="display:inline;">
+          <button class="btn btn-excluir mt-2">Excluir</button>
+        <a href="/comentario/editar/{{_id}}" class="btn btn-success mt-2">Editar</a>
+        </form>
+      {{/if}}
+    {{/if}}
+  </div>
+{{else}}
+  <p>Nenhum comentário ainda.</p>
+{{/each}}
+
+
+

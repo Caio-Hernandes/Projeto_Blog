@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/theme.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog NodeJS</title>
+</head>
+<body>
+    {{>_navbar}}
+    <div class="container mt-4">
+        {{#if error}}
+        <div class ="alert alert-danger">{{error}}</div>
+        {{else}}
+        {{/if}}
+        {{>_msg}}
+        {{{body}}}
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const toggleBtn = document.getElementById("themeToggle");
+            const currentTheme = localStorage.getItem("theme") || "dark";
+
+            document.body.classList.add(`${currentTheme}-theme`);
+            toggleBtn.textContent = currentTheme === "dark" ? "☀️ Modo Claro" : "🌙 Modo Escuro";
+
+            toggleBtn.addEventListener("click", () => {
+                document.body.classList.toggle("dark-theme");
+                document.body.classList.toggle("light-theme");
+
+                const isDark = document.body.classList.contains("dark-theme");
+                toggleBtn.textContent = isDark ? "☀️ Modo Claro" : "🌙 Modo Escuro";
+                localStorage.setItem("theme", isDark ? "dark" : "light");
+            });
+        });
+    </script>
+    <script src="/js/bootstrap.js"></script>
+</body>
+</html>

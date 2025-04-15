@@ -1,0 +1,8 @@
+<h3>Editar Comentário</h3>
+
+<form action="/admin/comentario/editar/{{comentario._id}}" method="POST">
+  <label for="texto">Comentário:</label>
+  <textarea name="texto" class="form-control" required>{{comentario.texto}}</textarea>
+  
+  <button type="submit" class="btn btn-success mt-3">Atualizar</button>
+</form>

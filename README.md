@@ -1,4 +1,4 @@
-# Blog Project
+# Blog Pessoal
 
 Este é um projeto simples de blog desenvolvido com **Node.js**, **Express**, **MongoDB** e **Handlebars**. O objetivo principal é fornecer uma aplicação básica de blog com CRUD (criar, ler, atualizar e excluir) de postagens. A interface permite a interação através de um painel de administração para gerenciar categorias e postagens.
 
